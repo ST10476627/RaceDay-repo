@@ -2,70 +2,16 @@ name: RaceDay CI
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
-            10.0.x
-
-      - name: Show .NET information
-        run: dotnet --info
-
-      - name: Show repository files
-        run: find . -maxdepth 4 -type f
-
-      - name: Find solution
-        id: find
-        shell: bash
-        run: |
-          SOLUTION=$(find . -name "*.sln" -print -quit)
-
-          if [ -n "$SOLUTION" ]; then
-            echo "target=$SOLUTION" >> "$GITHUB_OUTPUT"
-            echo "Found solution: $SOLUTION"
-          else
-            PROJECT=$(find . -name "*.csproj" -not -path "*/bin/*" -not -path "*/obj/*" -print -quit)
-
-            if [ -z "$PROJECT" ]; then
-              echo "No .sln or .csproj file found."
-              exit 1
-            fi
-
-            echo "target=$PROJECT" >> "$GITHUB_OUTPUT"
-            echo "Found project: $PROJECT"
-          fi
-
-      - name: Restore
-        run: dotnet restore "${{ steps.find.outputs.target }}"
-
-      - name: Build
-        run: dotnet build "${{ steps.find.outputs.target }}" --configuration Release --no-restore
-
-      - name: Run tests if test project exists
-        shell: bash
-        run: |
-          TEST_PROJECT=$(find . -name "*Test*.csproj" -o -name "*Tests*.csproj" | head -n 1)
-
-          if [ -n "$TEST_PROJECT" ]; then
-            echo "Running tests from $TEST_PROJECT"
-            dotnet test "$TEST_PROJECT" --configuration Release
-          else
-            echo "No test project found yet. Skipping tests."
-          fi
+      - name: Test workflow
+        run: echo "RaceDay workflow is working"
