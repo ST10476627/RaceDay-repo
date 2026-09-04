@@ -74,7 +74,7 @@ INSERT INTO [User] (FirstName, LastName, Email, password_hash, RoleID) VALUES
 ('Maria', 'Robinson', 'Maria.R20@gmail.com', '$2y$11$ZdXS5g4Z5novdZQdOdoauOSUw9DK8XWfZI4bMNcy.FPIaQk3PHAa2', 2),
 ('Mike', 'Hunter', 'HunterIceboy5@yahoo.com', '$2y$11$po.ohMF6GMl19EjuLe2po.ukvfEfU0d7VD6740GAex7wn/SuuXhne', 2);
 
-
+-- events details insert 
 INSERT INTO Event (EventName, Event_Discrip, EventDate, Distance, EventType, Location, organiserID) VALUES 
 ('Two Oceans Marathon', 'World-renowned ultra-marathon along the cape peninsula', '2027-06-13 06:00:00', 56.00, 'Run', 'Cape Town, Western Cape', 1),
 ('947 Ride Joburg', 'South Africa annual cycling race held on closed roads across Johannesburg', '2028-12-12 05:30:00', 97.00, 'Cycle', 'FNB Stadium', 2),
