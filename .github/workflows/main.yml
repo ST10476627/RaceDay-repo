@@ -2,15 +2,15 @@ name: RaceDay CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
+
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,11 +22,28 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Find solution or project
+        shell: bash
+        run: |
+          FILE=$(find . -name "*.sln" -print -quit)
+
+          if [ -z "$FILE" ]; then
+            FILE=$(find . -name "*.csproj" -print -quit)
+          fi
+
+          if [ -z "$FILE" ]; then
+            echo "No .sln or .csproj file found."
+            exit 1
+          fi
+
+          echo "PROJECT_FILE=$FILE" >> $GITHUB_ENV
+          echo "Using: $FILE"
+
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore "${{ env.PROJECT_FILE }}"
 
       - name: Build project
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build "${{ env.PROJECT_FILE }}" --configuration Release --no-restore
 
-      - name: Run unit tests
-        run: dotnet test --no-build --configuration Release
+      - name: Test project
+        run: dotnet test "${{ env.PROJECT_FILE }}" --configuration Release --no-build
