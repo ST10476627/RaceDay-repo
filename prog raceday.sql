@@ -1,12 +1,13 @@
 --Creating a database
 CREATE DATABASE RaceDay;
 
+--beigninning of the table creation
 Create table [Role] (
 RoleID int identity(1,1) primary key,
 RoleName varchar(100) not null unique
 );
 
---this a the user table
+
 CREATE TABLE [User] (
     UserId INT IDENTITY(1,1) PRIMARY KEY,
     FirstName varchar (100) NOT NULL,
