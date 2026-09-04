@@ -94,6 +94,7 @@ INSERT INTO Enrolment(ParticipantID, EnrolmentDate, EventID, CategoryID, Enrolme
 (6, '2026-09-13 12:15:00', 3, 3, 'Confirmed'),
 (7, '2026-09-14 14:00:00', 4, 4, 'Pending');
 
+-- The final results of the participants 
 INSERT INTO Results (EnrolmentID, FinishTime, FinishPosition) VALUES
 (5, '04:45:30', 102),
 (6, '05:12:15', 215),
