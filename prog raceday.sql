@@ -87,6 +87,8 @@ INSERT INTO Category (CategoryName, CategoryType, EventID) VALUES
 ('89km', 'Distance', 3),
 ('109km', 'Distance',4);
 
+-- the partcipants status 
+
 INSERT INTO Enrolment(ParticipantID, EnrolmentDate, EventID, CategoryID, Enrolment_status)VALUES
 (3, '2026-09-10 09:00:00', 1, 1, 'Confirmed'),
 (4, '2026-09-11 10:30:00', 1, 2, 'Confirmed'),
