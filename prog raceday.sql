@@ -58,7 +58,7 @@ CREATE TABLE Results (
     FinishPosition int not null,
     FOREIGN KEY (EnrolmentID) REFERENCES Enrolment(EnrolmentID)
 );
-
+-- end of table creation 
 INSERT INTO [Role] (RoleName) VALUES 
 ('Organiser'), 
 ('Participant');
