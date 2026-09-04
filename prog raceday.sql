@@ -59,6 +59,8 @@ CREATE TABLE Results (
     FOREIGN KEY (EnrolmentID) REFERENCES Enrolment(EnrolmentID)
 );
 -- end of table creation 
+
+-- on the first insert to diplay which roles get what ID
 INSERT INTO [Role] (RoleName) VALUES 
 ('Organiser'), 
 ('Participant');
