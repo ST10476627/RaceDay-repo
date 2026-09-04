@@ -81,6 +81,7 @@ INSERT INTO Event (EventName, Event_Discrip, EventDate, Distance, EventType, Loc
 ('Comrades Marathon', 'The ultimate human race of 89km between Durban and Pietermaritzburg', '2027-06-13 05:30:00', 89.00, 'Run', 'Durban to Pietermaritzburg', 1),
 ('Cape Town Cycle Tour', 'Timed cycle race across Cape Peninsula', '2027-03-14 06:15:00', 109.00, 'Cycle', 'Grand Parade', 2);
 
+-- types of categories
 INSERT INTO Category (CategoryName, CategoryType, EventID) VALUES
 ('56km', 'Distance', 1),
 ('97km', 'Distance', 2),
