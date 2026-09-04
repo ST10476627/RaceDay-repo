@@ -64,7 +64,7 @@ CREATE TABLE Results (
 INSERT INTO [Role] (RoleName) VALUES 
 ('Organiser'), 
 ('Participant');
-
+ -- this captures the names of the peoople doing the system 
 INSERT INTO [User] (FirstName, LastName, Email, password_hash, RoleID) VALUES 
 ( 'David', 'Nzapa', 'Babydaiz5@gmail.com', '$2a$11$0KjV/lX.K90C2W7wT8oD3e3O9mK2E4.k7vT1W3y4Z5A6B7C8D9E0F', 1),
 ( 'Michael', 'Olise', 'm-olise@gmail.com', '$2y$11$pggcd7vyfB3WyKQSmmKAG.Z510f2Ew59icYZpQUpd1pgczmgyQ6k.', 1),
