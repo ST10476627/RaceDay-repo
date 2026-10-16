@@ -7,7 +7,7 @@ RoleID int identity(1,1) primary key,
 RoleName varchar(100) not null unique
 );
 
-
+// TABLE CREATION 
 CREATE TABLE [User] (
     UserId INT IDENTITY(1,1) PRIMARY KEY,
     FirstName varchar (100) NOT NULL,
