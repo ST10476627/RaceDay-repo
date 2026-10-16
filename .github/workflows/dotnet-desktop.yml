@@ -1,16 +1,15 @@
-name: CI
+name: RaceDay CI
 
-# runs on every push and every pull request
 on:
   push:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get the code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up .NET
