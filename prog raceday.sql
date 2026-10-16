@@ -61,6 +61,7 @@ CREATE TABLE Results (
 -- end of table creation 
 
 -- on the first insert to diplay which roles get what ID
+// THE INSERTATION OF VALUE
 INSERT INTO [Role] (RoleName) VALUES 
 ('Organiser'), 
 ('Participant');
