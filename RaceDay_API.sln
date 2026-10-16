@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37502.11
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDay_API", "RaceDay_API.csproj", "{BFF07B9E-91D6-419E-8B1A-251C869ACF2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDay_ unitTest", "..\RaceDay_ unitTest\RaceDay_ unitTest.csproj", "{94488FF5-638B-4B62-BD3A-9B44FCEC4668}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF07B9E-91D6-419E-8B1A-251C869ACF2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF07B9E-91D6-419E-8B1A-251C869ACF2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF07B9E-91D6-419E-8B1A-251C869ACF2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF07B9E-91D6-419E-8B1A-251C869ACF2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94488FF5-638B-4B62-BD3A-9B44FCEC4668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94488FF5-638B-4B62-BD3A-9B44FCEC4668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94488FF5-638B-4B62-BD3A-9B44FCEC4668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94488FF5-638B-4B62-BD3A-9B44FCEC4668}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF99EB10-C8FF-47B6-B8CB-2ABE42ED5A04}
+	EndGlobalSection
+EndGlobal
