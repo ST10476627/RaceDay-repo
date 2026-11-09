@@ -1,0 +1,65 @@
+﻿@model EventDetailsViewModel
+@{
+    ViewData["Title"] = Model.Event.EventName;
+}
+
+<a asp-action="Index" class="rd-link-accent">&larr; Back to events</a>
+
+@if (TempData["Success"] != null)
+{
+    <div class="rd-alert rd-alert-success mt-3">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="rd-alert rd-alert-danger mt-3">@TempData["Error"]</div>
+}
+
+<div class="row g-4 mt-1">
+    <div class="col-lg-7">
+        <div class="rd-card">
+            @if (!string.IsNullOrEmpty(Model.Event.BannerUrl))
+            {
+                <img src="@Model.Event.BannerUrl" alt="Event banner" class="rd-banner rd-banner-large" />
+            }
+
+            <span class="rd-type rd-type-@Model.Event.EventType.ToLower()">@Model.Event.EventType</span>
+            <h2 class="rd-page-title mt-3">@Model.Event.EventName</h2>
+
+            <p class="rd-detail-meta mb-1">@Model.Event.EventDate.ToString("dddd, dd MMMM yyyy 'at' HH:mm")</p>
+            <p class="rd-detail-meta mb-1">@Model.Event.Location</p>
+            <p class="rd-detail-meta">@Model.Event.Distance km</p>
+
+            <p>@Model.Event.EventDescription</p>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="rd-card">
+            
+            <h3>Enter this event</h3>
+
+            @if (Model.Categories.Count == 0)
+            {
+                <p class="rd-detail-meta">No categories have been added yet. Check back soon.</p>
+            }
+            else
+            {
+                <form method="post" asp-controller="Home" asp-action="Enrol">
+                    <input type="hidden" name="eventId" value="@Model.Event.EventID" />
+
+                    @foreach (CategoryViewModel c in Model.Categories)
+                    {
+                        <label class="rd-category-option">
+                            <input type="radio" name="categoryId" value="@c.CategoryID" required />
+                            <span><strong>@c.CategoryName</strong> <span class="rd-detail-meta">(@c.CategoryType)</span></span>
+                        </label>
+                    }
+
+                    <button type="submit" class="btn rd-btn w-100 mt-3">
+                        Enrol now <span class="rd-btn-arrow">&rarr;</span>
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
