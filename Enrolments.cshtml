@@ -1,0 +1,71 @@
+﻿@model List<OrganiserEnrolmentViewModel>
+@{
+    ViewData["Title"] = "Enrolments";
+    List<EventSummaryViewModel> events = ViewBag.Events;
+    int? eventId = ViewBag.EventId;
+}
+
+<h2 class="rd-page-title">Enrolments</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="rd-alert rd-alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="rd-alert rd-alert-danger">@TempData["Error"]</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="rd-alert rd-alert-danger">@ViewBag.Error</div>
+}
+
+<form method="get" class="rd-card mb-4">
+    <label class="form-label">Choose an event</label>
+    <select name="eventId" class="form-select" onchange="this.form.submit()">
+        <option value="">Select an event...</option>
+        @foreach (EventSummaryViewModel e in events)
+        {
+            <option value="@e.EventID" selected="@(eventId == e.EventID)">@e.EventName (@e.TotalEnrolments enrolled)</option>
+        }
+    </select>
+</form>
+
+@if (eventId != null)
+{
+    @if (Model.Count == 0)
+    {
+        <div class="rd-card text-center">Nobody has enrolled for this event yet.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table rd-table">
+                <thead><tr><th>Participant</th><th>Category</th><th>Enrolled on</th><th>Status</th><th>Change status</th></tr></thead>
+                <tbody>
+                    @foreach (OrganiserEnrolmentViewModel en in Model)
+                    {
+                        <tr>
+                            <td>@en.ParticipantName</td>
+                            <td>@en.CategoryName</td>
+                            <td>@en.EnrolmentDate.ToString("dd MMM yyyy")</td>
+                            <td><span class="rd-status rd-status-@en.Status.ToLower()">@en.Status</span></td>
+                            <td>
+                                <form method="post" asp-action="UpdateStatus" class="d-flex gap-2">
+                                    <input type="hidden" name="enrolmentId" value="@en.EnrolmentID" />
+                                    <input type="hidden" name="eventId" value="@eventId" />
+                                    <select name="status" class="form-select form-select-sm">
+                                        <option value="Pending" selected="@(en.Status == "Pending")">Pending</option>
+                                        <option value="Confirmed" selected="@(en.Status == "Confirmed")">Confirmed</option>
+                                        <option value="Cancelled" selected="@(en.Status == "Cancelled")">Cancelled</option>
+                                    </select>
+                                    <button type="submit" class="btn rd-btn-outline btn-sm">Save</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
