@@ -1,0 +1,46 @@
+﻿@model List<EventSummaryViewModel>
+@{
+    ViewData["Title"] = "Dashboard";
+    List<EventSummaryViewModel> upcoming = Model.Where(e => e.EventDate >= DateTime.Today).OrderBy(e => e.EventDate).ToList();
+}
+
+<h2 class="rd-page-title">Organiser dashboard</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="rd-alert rd-alert-danger">@ViewBag.Error</div>
+}
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4"><div class="rd-stat"><div class="rd-stat-number">@Model.Count</div><div class="rd-stat-label">Events created</div></div></div>
+    <div class="col-md-4"><div class="rd-stat"><div class="rd-stat-number">@Model.Sum(e => e.TotalEnrolments)</div><div class="rd-stat-label">Total enrolments</div></div></div>
+    <div class="col-md-4"><div class="rd-stat"><div class="rd-stat-number">@upcoming.Count</div><div class="rd-stat-label">Upcoming events</div></div></div>
+</div>
+
+<h3 class="mb-3">Upcoming events</h3>
+@if (upcoming.Count == 0)
+{
+    <div class="rd-card text-center">
+        No upcoming events yet.
+        <div class="mt-3"><a class="btn rd-btn-outline" asp-action="CreateEvent">Create an event</a></div>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table rd-table">
+            <thead><tr><th>Event</th><th>Date</th><th>Location</th><th>Enrolments</th></tr></thead>
+            <tbody>
+                @foreach (EventSummaryViewModel e in upcoming)
+                {
+                    <tr>
+                        <td>@e.EventName</td>
+                        <td>@e.EventDate.ToString("dd MMM yyyy, HH:mm")</td>
+                        <td>@e.Location</td>
+                        <td>@e.TotalEnrolments</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
