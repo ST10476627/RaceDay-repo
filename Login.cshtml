@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="rd-auth rd-card">
+    <div class="rd-card-brand mb-3">
+        <span class="rd-brand-box">CARDIO</span>
+        <span class="rd-brand-text">RaceDAY</span>
+    </div>
+
+    <div class="rd-auth-header">
+        <span class="rd-tag">ATHLETE &amp; ORGANISER ACCESS</span>
+        <h2>LOG IN</h2>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="rd-alert rd-alert-success">
+            <span class="rd-alert-symbol">✓</span>
+            <div>@TempData["Success"]</div>
+        </div>
+    }
+    @if (ViewBag.Error != null)
+    {
+        <div class="rd-alert rd-alert-danger">
+            <span class="rd-alert-symbol">!</span>
+            <div>@ViewBag.Error</div>
+        </div>
+    }
+
+    <form method="post" asp-controller="Account" asp-action="Login" class="rd-form">
+        <div class="rd-field-group mb-4">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder=" " required autocomplete="email" />
+        </div>
+
+        <div class="rd-field-group mb-4">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder=" " required autocomplete="current-password" />
+        </div>
+
+        <button type="submit" class="btn rd-btn w-100">
+            <span>LOG IN</span>
+            <span class="rd-btn-arrow">→</span>
+        </button>
+    </form>
+
+    <div class="rd-auth-footer mt-4 pt-3">
+        <p class="mb-0">NEW TO RACEDAY? <a asp-action="Register" class="rd-link-accent">CREATE AN ACCOUNT</a></p>
+    </div>
+</div>
