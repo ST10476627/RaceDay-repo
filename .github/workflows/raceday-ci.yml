@@ -1,4 +1,4 @@
-
+```yaml
 name: RaceDay CI
 
 on:
@@ -24,24 +24,14 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore packages
-        run: dotnet restore
+        run: dotnet restore RaceDay_MVC/RaceDay.sln
 
       - name: Build solution
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build RaceDay_MVC/RaceDay.sln --no-restore --configuration Release
 
       - name: Run unit tests
-        run: >
-          dotnet test
-          --no-build
-          --configuration Release
-          --logger "trx;LogFileName=test-results.trx"
-          --results-directory ./TestResults
-        continue-on-error: true
+        run: dotnet test RaceDay_MVC/RaceDay.sln --no-build --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: RaceDay-Test-Results
-          path: TestResults/*.trx
-          if-no-files-found: ignore
+       
