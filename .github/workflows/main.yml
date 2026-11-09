@@ -1,5 +1,5 @@
 ```yaml
-name: main
+name: RaceDay CI
 
 on:
   push:
