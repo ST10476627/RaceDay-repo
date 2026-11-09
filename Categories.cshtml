@@ -1,0 +1,91 @@
+﻿@model List<CategoryViewModel>
+@{
+    ViewData["Title"] = "Categories";
+    List<EventSummaryViewModel> events = ViewBag.Events;
+    int? eventId = ViewBag.EventId;
+}
+
+<h2 class="rd-page-title">Categories</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="rd-alert rd-alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="rd-alert rd-alert-danger">@TempData["Error"]</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="rd-alert rd-alert-danger">@ViewBag.Error</div>
+}
+
+<form method="get" class="rd-card mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-9">
+            <label class="form-label">Choose an event</label>
+            <select name="eventId" class="form-select" onchange="this.form.submit()">
+                <option value="">Select an event...</option>
+                @foreach (EventSummaryViewModel e in events)
+                {
+                    <option value="@e.EventID" selected="@(eventId == e.EventID)">@e.EventName (@e.EventDate.ToString("dd MMM yyyy"))</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3 d-grid"><button type="submit" class="btn rd-btn">Show</button></div>
+    </div>
+</form>
+
+@if (eventId != null)
+{
+    <div class="row g-4">
+        <div class="col-lg-7">
+            @if (Model.Count == 0)
+            {
+                <div class="rd-card text-center">No categories yet for this event.</div>
+            }
+            else
+            {
+                <table class="table rd-table">
+                    <thead><tr><th>Category</th><th>Type</th><th></th></tr></thead>
+                    <tbody>
+                        @foreach (CategoryViewModel c in Model)
+                        {
+                            <tr>
+                                <td>@c.CategoryName</td>
+                                <td>@c.CategoryType</td>
+                                <td>
+                                    <form method="post" asp-action="DeleteCategory" onsubmit="return confirm('Delete this category?');">
+                                        <input type="hidden" name="id" value="@c.CategoryID" />
+                                        <input type="hidden" name="eventId" value="@eventId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="col-lg-5">
+            <div class="rd-card">
+                <h3>Add a category</h3>
+                <form method="post" asp-action="AddCategory">
+                    <input type="hidden" name="eventId" value="@eventId" />
+                    <div class="mb-3">
+                        <label class="form-label">Name (e.g. Under 20, Senior, 10km)</label>
+                        <input type="text" name="categoryName" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <select name="categoryType" class="form-select">
+                            <option value="Age">Age</option>
+                            <option value="Distance">Distance</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn rd-btn w-100">Add category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
