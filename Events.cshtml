@@ -1,0 +1,55 @@
+﻿@model List<EventSummaryViewModel>
+@{
+    ViewData["Title"] = "Events";
+}
+
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <h2 class="rd-page-title">My events</h2>
+    <a class="btn rd-btn" asp-action="CreateEvent">New event <span class="rd-btn-arrow">&rarr;</span></a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="rd-alert rd-alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="rd-alert rd-alert-danger">@TempData["Error"]</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="rd-alert rd-alert-danger">@ViewBag.Error</div>
+}
+
+@if (Model.Count == 0 && ViewBag.Error == null)
+{
+    <div class="rd-card text-center">You have not created any events yet.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table rd-table">
+            <thead><tr><th>Event</th><th>Type</th><th>Date</th><th>Location</th><th>Distance</th><th>Enrolments</th><th></th></tr></thead>
+            <tbody>
+                @foreach (EventSummaryViewModel e in Model)
+                {
+                    <tr>
+                        <td>@e.EventName</td>
+                        <td><span class="rd-type rd-type-@e.EventType.ToLower()">@e.EventType</span></td>
+                        <td>@e.EventDate.ToString("dd MMM yyyy")</td>
+                        <td>@e.Location</td>
+                        <td>@e.Distance km</td>
+                        <td>@e.TotalEnrolments</td>
+                        <td class="text-nowrap">
+                            <a class="btn rd-btn-outline btn-sm" asp-action="EditEvent" asp-route-id="@e.EventID">Edit</a>
+                            <form method="post" asp-action="DeleteEvent" asp-route-id="@e.EventID" class="d-inline"
+                                  onsubmit="return confirm('Delete this event?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
