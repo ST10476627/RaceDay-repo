@@ -1,0 +1,39 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "My profile";
+}
+
+<h2 class="rd-page-title">My profile</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="rd-alert rd-alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="rd-alert rd-alert-danger">@TempData["Error"]</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="rd-alert rd-alert-danger">@ViewBag.Error</div>
+}
+
+<div class="rd-card" style="max-width: 560px;">
+    <form method="post" asp-controller="Participant" asp-action="Profile">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">First name</label>
+                <input type="text" name="firstName" value="@Model.FirstName" class="form-control" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Last name</label>
+                <input type="text" name="lastName" value="@Model.LastName" class="form-control" required />
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" value="@Model.Email" class="form-control" required />
+        </div>
+        <button type="submit" class="btn rd-btn">Save changes <span class="rd-btn-arrow">&rarr;</span></button>
+    </form>
+</div>
